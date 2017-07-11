@@ -30,6 +30,8 @@ export class FeedPage {
   public num1: number;
   public num2: number;
 
+  public lista_filmes = new Array<any>();
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,7 +48,9 @@ export class FeedPage {
     // this.somaDoisNumeros(10,99);
     this.movieProvider.getLatestMovies().subscribe(
       data => {
-        console.log(data);
+        const obj_retorno = JSON.parse((data as any)._body);
+        this.lista_filmes = obj_retorno.results;
+        console.log(this.lista_filmes);
       }, error =>{
         console.log(error);
       })
